@@ -1,27 +1,29 @@
 <template>
-  <div id="app">
-    <Background/>
-    <BarrelLayer/>
+  <div id="#app" class="background">
+    <ShooterContainer/>
   </div>
 </template>
 
 <script>
-import Background from "../../007-minigame/src/components/BarrelLayer";
-import BarrelLayer from "../../007-minigame/src/components/BarrelLayer";
+import ShooterContainer from "@/components/ShooterContainer";
 
 export default {
   name: 'App',
   components: {
-    BarrelLayer,
-    Background
-  }
+    ShooterContainer
+  },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
 }
 </style>
