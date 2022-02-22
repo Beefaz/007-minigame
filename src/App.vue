@@ -16,8 +16,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@font-face {
+  src: url(../src/assets/fonts/QuantumItalic-Re0V.ttf);
+  font-family: bond;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: bond, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

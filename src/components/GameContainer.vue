@@ -3,15 +3,17 @@
        :class="gameStatus === 'playing' ? 'menu-closed' : 'menu-open'"
        @mousemove="getMouseCoordinates($event)"
   >
-    <Enemy
-        @status-change="(val)=>gameStatus=val"
-        @reaction-time="(val)=>reactionTime=val"
-    />
+    <template v-if="gameStatus!==null">
+      <Enemy
+          :key="gameSeed"
+          @game-result="(val) => gameResult = val"
+          @game-status="(val) => gameStatus = val"
+      />
+    </template>
     <Barrel :mouse-coordinates="mouseCoordinates"/>
     <MenuLayer
-        v-if="gameStatus !== 'playing'"
-        :game-status="gameStatus"
-        :time="reactionTime"
+        v-if="gameStatus !== 'playing' || gameStatus === null"
+        :game-result="gameResult"
         @status-change="(val)=>gameStatus=val"
     />
   </div>
@@ -31,9 +33,9 @@ export default {
   },
   data() {
     return {
-      gameStatus: 'new',
-      reactionTime: 0,
-      menuIsOpen: false,
+      gameSeed: 0,
+      gameStatus: null,
+      gameResult: {},
       mouseCoordinates: {
         x: 0,
         y: 0,
@@ -48,11 +50,8 @@ export default {
     this.setContainerCoordinates();
   },
   methods: {
-    doSomething(status) {
-      console.log(status);
-    },
     getMouseCoordinates(event) {
-      if (this.menuIsOpen) return;
+      if (this.gameStatus !== 'playing') return;
       const {x, y} = event;
       this.mouseCoordinates = {
         x: x - this.containerCoordinates.x,
@@ -63,6 +62,13 @@ export default {
       const {offsetLeft, offsetTop} = this.$el;
       this.containerCoordinates = {x: offsetLeft, y: offsetTop};
     }
+  },
+  watch: {
+    gameStatus: function (val) {
+      if (val === 'playing') {
+        this.gameSeed++;
+      }
+    },
   },
 }
 </script>

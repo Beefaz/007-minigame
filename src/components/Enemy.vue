@@ -47,6 +47,10 @@ export default {
       enemyFireDelay: false,
       animationDelay: 0,
       reactionTime: 0,
+      gameResult: {
+        enemyIsHit: false,
+        reactionTime: null
+      },
       bloodCoordinates: {
         x: 0,
         y: 0,
@@ -62,19 +66,24 @@ export default {
   watch: {
     enemyIsAiming: function (enemyIsAiming) {
       if (enemyIsAiming) {
-        this.enemyFireDelay = this.randomIntFromInterval(1000, 3000);
+        this.enemyFireDelay = this.randomIntFromInterval(300, 3000);
         this.reactionTimer();
       }
     },
     enemyIsHit: function (enemyIsHit) {
       if (enemyIsHit) {
-        this.$emit('reaction-time', this.reactionTime);
-        this.$emit('status-change', 'game-over');
+        this.gameResult = {
+          enemyIsHit: this.enemyIsHit,
+          reactionTime: this.reactionTime,
+        }
       }
     },
   },
   methods: {
     shoot(event) {
+      if (this.enemyIsHit) {
+        return;
+      }
       this.enemyIsHit = true;
       const {layerX, layerY, target} = event;
       this.bloodCoordinates = {
@@ -95,7 +104,8 @@ export default {
         this.reactionTime = this.reactionTime + 7;
         setTimeout(() => this.reactionTimer(), 7);
       } else {
-        this.$emit('status-change', 'died');
+        this.$emit('game-result', this.gameResult);
+        this.$emit('game-status', 'game-over');
       }
     },
   },
