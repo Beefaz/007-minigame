@@ -20,6 +20,7 @@ export default {
   src: url(../src/assets/fonts/QuantumItalic-Re0V.ttf);
   font-family: bond;
 }
+
 #app {
   font-family: bond, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
