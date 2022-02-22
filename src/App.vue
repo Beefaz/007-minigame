@@ -1,16 +1,16 @@
 <template>
   <div id="#app" class="background">
-    <ShooterContainer/>
+    <GameContainer/>
   </div>
 </template>
 
 <script>
-import ShooterContainer from "@/components/ShooterContainer";
+import GameContainer from "@/components/GameContainer";
 
 export default {
   name: 'App',
   components: {
-    ShooterContainer
+    GameContainer,
   },
 }
 </script>
@@ -21,9 +21,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .background {
   width: 100vw;
   height: 100vh;
   background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
