@@ -98,7 +98,7 @@ export default {
 
     &:hover::after {
       position: absolute;
-      content: 'As true 007, you will only shoot in retaliation, when enemy aims your gun at you';
+      content: 'As true 007, you will only shoot in retaliation, when enemy aims his gun at you';
       top: 50%;
       right: 50%;
       color: white;
