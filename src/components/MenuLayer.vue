@@ -55,7 +55,7 @@ export default {
   methods: {
     handleCookieData() {
       if (localStorage.getItem('best-score')) this.bestScore = JSON.parse(localStorage.getItem('best-score'));
-      if (this.gameResult.enemyIsHit && this.bestScore > this.gameResult.reactionTime || this.bestScore === null) {
+      if (this.gameResult.enemyIsHit && (this.bestScore > this.gameResult.reactionTime || !this.bestScore)) {
         localStorage.removeItem('best-score');
         localStorage.setItem('best-score', JSON.stringify(this.gameResult.reactionTime));
       }
