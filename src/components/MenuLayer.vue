@@ -19,7 +19,7 @@
       Start new game
     </button>
     <div v-if="bestScore">
-      Your best before: {{ bestScore }}
+      Your best time: {{ bestScore }}
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
   methods: {
     handleCookieData() {
       if (localStorage.getItem('best-score')) this.bestScore = JSON.parse(localStorage.getItem('best-score'));
-      if (this.gameResult.enemyIsHit && this.bestScore > this.gameResult.reactionTime) {
+      if (this.gameResult.enemyIsHit && this.bestScore > this.gameResult.reactionTime || this.bestScore === null) {
         localStorage.removeItem('best-score');
         localStorage.setItem('best-score', JSON.stringify(this.gameResult.reactionTime));
       }
@@ -98,7 +98,7 @@ export default {
 
     &:hover::after {
       position: absolute;
-      content: 'As true 007, you will only shoot in retaliation, when enemy aims his gun at you';
+      content: 'As true 007, you will only shoot in retaliation, when enemy aims your gun at you';
       top: 50%;
       right: 50%;
       color: white;
